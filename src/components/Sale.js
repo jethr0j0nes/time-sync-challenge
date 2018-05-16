@@ -3,7 +3,10 @@ import React from 'react'
 class Sale extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {now: new Date()}
+    this.state = {
+      now: new Date(),
+      reload: false
+    }
   }
 
   componentDidMount() {
@@ -27,7 +30,11 @@ class Sale extends React.Component {
       if(Math.abs(now - prevTime) > 10000) {
         // Verify we are in the browser
         if (typeof window !== 'undefined' && window.document) {
+          // Reload page.
           window.location.reload(true)
+          return {
+            reload: true
+          }
         }
       }
 
@@ -52,11 +59,14 @@ class Sale extends React.Component {
   render() {
 
     let saleInfo = ''
-    const now = new Date().getTime()
+    const now = this.state.now.getTime()
     const startAt = new Date(this.props.sale.startAt).getTime()
     const finishAt = new Date(this.props.sale.finishAt).getTime()
 
-    if (now <  startAt) {
+    if (this.state.reload) {
+      saleInfo = ''
+    }
+    else if (now < startAt) {
       saleInfo = this.timeRemaining(now, startAt)
     }
     else if (now > startAt && now < finishAt) {
