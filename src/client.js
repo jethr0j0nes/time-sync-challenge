@@ -8,21 +8,19 @@ isSynced()
 // Pass in sync status and hydrate App.
 async function isSynced() {
 
-  let isSynced = true
+  let isSynced = false
 
   let result = await doFetch()
-  if(!result.now && !Number.isInteger(result.now)) {
-    isSynced = false
+  if(result && result.now && Number.isInteger(result.now)) {
+    let serverTime = result.now
+    let now = new Date().getTime()
+
+    if(Math.abs(serverTime - now) < 10000) {
+      isSynced = true
+    }
   }
 
-  let serverTime = result.now
-  let now = new Date().getTime()
-
-  if(Math.abs(serverTime - now) > 10000) {
-    isSynced = false
-  }
-
-    hydrate(<App synced={isSynced} />, document.getElementById("root"))
+  hydrate(<App synced={isSynced} />, document.getElementById("root"))
 }
 
 if (module.hot) {

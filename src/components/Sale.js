@@ -4,8 +4,7 @@ class Sale extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      now: new Date(),
-      reload: false
+      now: new Date()
     }
   }
 
@@ -33,9 +32,6 @@ class Sale extends React.Component {
         if (typeof window !== "undefined" && window.document) {
           // Reload page.
           window.location.reload(true)
-          return {
-            reload: true
-          }
         }
       }
 
@@ -67,10 +63,7 @@ class Sale extends React.Component {
     const startAt = new Date(this.props.sale.startAt).getTime()
     const finishAt = new Date(this.props.sale.finishAt).getTime()
 
-    if (this.state.reload) {
-      saleInfo = ""
-    }
-    else if (now < startAt) {
+    if (now < startAt) {
       saleInfo = this.timeRemaining(now, startAt)
     }
     else if (now > startAt && now < finishAt) {
