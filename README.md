@@ -32,3 +32,15 @@ If there is a mismatch between the computers time and the servers time (greate t
 As an additional feature to detect the user changing their computers clock after the page is loaded we check for large time jumps when updating the sales timers state.  If we detect a jump of greater than 10 s between the previous time and the current (timer updates every 1 s on it's own) we assume something is amiss and reload the page which triggers the call to the server to sync time.
 
 The start and end of the sale are included as environment variables in the .env file.
+
+## Testing
+To test locally, because the local server and browser are always in sync, one can modify the /sync api endpoint in server.js to change the returned time of the server.
+To test out of sync computer clock on initial load:
+Change api to offset version and reload the page.
+
+To test computer clock change afer page load:
+Load page with correct time on computer and server.
+Change api to offset returned server time.
+Change computer clock
+
+ **note changing server api time only works when running with npm start which includes hot module reloading.
