@@ -1,6 +1,6 @@
-import React from 'react'
-import { hydrate } from 'react-dom'
-import App from './App'
+import React from "react"
+import { hydrate } from "react-dom"
+import App from "./App"
 
 isSynced()
 
@@ -22,7 +22,7 @@ async function isSynced() {
     isSynced = false
   }
 
-    hydrate(<App synced={isSynced} />, document.getElementById('root'));
+    hydrate(<App synced={isSynced} />, document.getElementById("root"))
 }
 
 if (module.hot) {
@@ -30,11 +30,11 @@ if (module.hot) {
 }
 
 function doFetch() {
-  return fetch('/sync')
+  return fetch("/sync")
     .then(function(response) {
       if(!response.status && response.status !== 200) {
-        console.log('Invalid sync api response.')
-        alert('Unable to contact server.')
+        console.log("Invalid sync api response.")
+        alert("Unable to contact server.")
         return null
       }
       return response.json()

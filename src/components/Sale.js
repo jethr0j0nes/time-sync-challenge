@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 class Sale extends React.Component {
   constructor(props) {
@@ -26,10 +26,11 @@ class Sale extends React.Component {
       let now = new Date().getTime()
       let prevTime = new Date(prevState.now).getTime()
 
-      // If someone changes there computer clock after loading the page we reload it.
+      // If someone changes there computer clock
+      // after loading the page we reload it.
       if(Math.abs(now - prevTime) > 10000) {
         // Verify we are in the browser
-        if (typeof window !== 'undefined' && window.document) {
+        if (typeof window !== "undefined" && window.document) {
           // Reload page.
           window.location.reload(true)
           return {
@@ -53,27 +54,30 @@ class Sale extends React.Component {
     let minutes = Math.floor(t/(60) % 60)
     let seconds = Math.floor(t % 60)
 
-    return days + ' days ' + hours + ' hours ' + minutes + ' minutes ' + seconds + ' seconds remaining until start.'
+    return `${days} days \
+            ${hours} hours \
+            ${minutes} minutes \
+            ${seconds} seconds remaining until start.`
   }
 
   render() {
 
-    let saleInfo = ''
+    let saleInfo = ""
     const now = this.state.now.getTime()
     const startAt = new Date(this.props.sale.startAt).getTime()
     const finishAt = new Date(this.props.sale.finishAt).getTime()
 
     if (this.state.reload) {
-      saleInfo = ''
+      saleInfo = ""
     }
     else if (now < startAt) {
       saleInfo = this.timeRemaining(now, startAt)
     }
     else if (now > startAt && now < finishAt) {
-      saleInfo = 'Sale is live!!!!!'
+      saleInfo = "Sale is live!!!!!"
     }
     else if (now > finishAt) {
-      saleInfo = 'Sale is over.'
+      saleInfo = "Sale is over."
     }
 
     return (
@@ -86,10 +90,3 @@ class Sale extends React.Component {
 }
 
 export default Sale
-
-
-
-
-
-
-
