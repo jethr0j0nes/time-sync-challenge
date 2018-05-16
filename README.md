@@ -1,20 +1,34 @@
-# Razzle Basic Example
+# Time Sync Challenge
 
 ## How to use
-Download the example [or clone the whole project](https://github.com/jaredpalmer/razzle.git):
+Clone https://github.com/jethr0j0nes/time-sync-challenge.git
 
 ```bash
-curl https://codeload.github.com/jaredpalmer/razzle/tar.gz/master | tar -xz --strip=2 razzle-master/examples/basic
-cd basic
+git clone git clone https://github.com/jethr0j0nes/time-sync-challenge.git
+cd time-sync-challenge
 ```
 
 Install it and run:
 
 ```bash
-yarn install
-yarn start
+npm install
+npm run build
+npm start
 ```
 
-## Idea behind the example
-This is a basic, bare-bones example of how to use razzle. It satisfies the entry points
-`src/index.js` for the server and and `src/client.js` for the browser.
+## Description
+This is an example token sale with some built in security features.
+
+The initial render of the react application happens server side to gurantee the initial view is accurate and cacheable in a cdn for improved performance.
+
+The concern is that a malicious user would change their computers clock in an attempt to display innacurate information related to the sale.
+
+To prevent this an api end point is provided which returns the servers time.
+/sync
+
+After the initial html is loaded from the server the client js makes a request to the servers api endpoint.
+If there is a mismatch between the computers time and the servers time (greate than 10 s difference is considered a mismatch) a message is displayed telling the user to fix their computers time and reload the page.
+
+As an additional feature to detect the user changing their computers clock after the page is loaded we check for large time jumps when updating the sales timers state.  If we detect a jump of greater than 10 s between the previous time and the current (timer updates every 1 s on it's own) we assume something is amiss and reload the page which triggers the call to the server to sync time.
+
+The start and end of the sale are included as environment variables in the .env file.
