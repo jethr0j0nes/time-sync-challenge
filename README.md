@@ -43,4 +43,4 @@ Load page with correct time on computer and server.
 Change api to offset returned server time.
 Change computer clock
 
- **note changing server api time only works when running with npm start which includes hot module reloading.  It's best to stop and run npm start again between changes as hot module reloading doesn't always seem to work.
+ **note changing server api time only works when running with npm start which includes hot module reloading or stopping and running npm start again.  It's best to stop and run npm start again between changes as hot module reloading doesn't always seem to work.
