@@ -4,7 +4,7 @@
 Clone https://github.com/jethr0j0nes/time-sync-challenge.git
 
 ```bash
-git clone git clone https://github.com/jethr0j0nes/time-sync-challenge.git
+git clone https://github.com/jethr0j0nes/time-sync-challenge.git
 cd time-sync-challenge
 ```
 
