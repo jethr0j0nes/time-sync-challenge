@@ -10,8 +10,13 @@ const server = express()
 // Our api route for syncing server and client.
 server.get('/sync', function (req, res) {
   res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
-  //let now = 3000//
+
   let now = new Date().getTime()
+  // Used for testing purposes.
+  // Simulating a client that is now 20 seconds faster than the server.
+  //let now = new Date().getTime() - 20000
+  //let now = 3000
+
   res.json({ now : now})
 })
 
@@ -19,7 +24,7 @@ server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/*', (req, res) => {
-    const markup = renderToString(<App />);
+    const markup = renderToString(<App synced={true}/>);
     res.send(
       `<!doctype html>
       <html lang="">
@@ -37,7 +42,5 @@ server
       </html>`
     )
   })
-
-
 
 export default server;

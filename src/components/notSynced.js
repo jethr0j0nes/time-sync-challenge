@@ -5,6 +5,7 @@ const notSynced = () => {
     <div>
       Your computers clock is out of date.
       Please ensure that your clock is automatically synced and updated.
+      Then reload the sale.
     </div>
   )
 }
