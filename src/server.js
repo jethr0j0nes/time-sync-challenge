@@ -8,6 +8,7 @@ const assets = require(process.env.RAZZLE_ASSETS_MANIFEST)
 const server = express()
 
 // Our api route for syncing server and client.
+// Return current time.
 server.get('/sync', function (req, res) {
   res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
 
@@ -20,6 +21,7 @@ server.get('/sync', function (req, res) {
   res.json({ now : now})
 })
 
+// Return initial rendering of react app.
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
